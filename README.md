@@ -1,6 +1,7 @@
 ## 项目包含有
-- flyio 实现api接口拦截
-- 不同环境的api接口域名
+- `flyio` 实现`api`接口拦截
+- 不同环境的`api`接口域名
+- `mobx-miniprogram-bindings` 作为全局的状态数据管理
 
 ## 目录说明
 - api 接口
