@@ -1,0 +1,34 @@
+@charset "UTF-8";
+.common-pagiantion {
+  text-align: center;
+  font-size: 22rpx;
+  letter-spacing: 10rpx;
+  color: #888;
+}
+.common-pagiantion .common-pagiantion-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 888;
+  left: 0;
+  top: 0;
+}
+.common-pagiantion .common-pagiantion-loading image {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  vertical-align: middle;
+  animation: loading 2s ease infinite;
+  -moz-animation: loading 2s ease infinite;
+  /* Firefox */
+  -webkit-animation: loading 2s ease infinite;
+  /* Safari 和 Chrome */
+  -o-animation: loading 2s ease infinite;
+  /* Opera */
+}
+.common-pagiantion .common-pagiantion-nomore, .common-pagiantion .common-pagiantion-loading {
+  padding: 15rpx;
+  line-height: 40rpx;
+  background: #eeeeee;
+}

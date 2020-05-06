@@ -9,10 +9,19 @@
 - pages 页面
 - utils 公共工具类/方法
 
-## 登陆流程
-code -> 后端获取openid检查是否已注册  -> 已注册则直接返回token，进入页面;未注册则正常登陆注册流程
+## 用户无感登陆流程
+
+进入小程序程序-》请求数据，如果没有token，则会锁住请求，想去登陆获取token再继续原来的请求（也就是说无伦如何，用户都有token，用户一进来就无感知登陆，后台根据code获取用户openid）
+
+token失效请求失败时，锁住请求，重新登陆获取新的token，再重新发起失败请求，返回数据（用户无感知，重新登陆换取新token）
 
 
-## 说明
-login 第一页面也为授权登陆页面，也为中转页
-用户进入任何页面钱都必须先进过login，处理或拦截权限后再跳转到目标页。如果是开放的则无须
+## 字体图标
+assets/styles/font.wxss
+
+## 组件
+- 图片裁剪(image-cropper)
+- 空内容提示(is-null)
+- 分页加载提示（pagination）
+- 生成分享海报（poster-modal）[https://github.com/jasondu/wxa-plugin-canvas](https://github.com/jasondu/wxa-plugin-canvas)
+- 骨架屏（skeleton）

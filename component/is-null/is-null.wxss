@@ -1,0 +1,28 @@
+.no-content {
+    width: 100%;
+  }
+  .no-content .no-content-pic {
+    text-align: center;
+  }
+  .no-content .no-content-pic image {
+    width: 220rpx;
+    height: 220rpx;
+  }
+  .no-content .no-content-cont {
+    text-align: center;
+  }
+  .no-content .no-content-cont text {
+    font-size: 28rpx;
+    color: #222;
+    line-height: 50rpx;
+  }
+  .no-content .no-content-cont .operate-btn {
+    display: inline-block;
+    color: #1b88ee;
+  }
+
+  .no-content-cont{
+      color: #999999;
+      font-size: 24rpx;
+      margin-top: 30rpx;
+  }

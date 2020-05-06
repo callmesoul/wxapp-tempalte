@@ -1,0 +1,10 @@
+<!--component/poster-modal/poster-modal.wxml-->
+<view class="poster-modal flex flex-align-center flex-pack-center">
+    <view class="body">
+        <text class="iconfont icon-jia close" catchtap="close"></text>
+        <image src="{{src}}" class="poster-iamge"></image>
+        <view class="action">
+            <button catchtap="saveImage">保存图片</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,10 @@
+<!--component/pagination/pagination.wxml-->
+<view class="common-pagiantion" wx:if="{{nothing || loading}}">
+    <view wx:if="{{loading}}" class="common-pagiantion-mask"></view>
+    <view class="common-pagiantion-loading" wx:if="{{loading}}">
+      <image src="/assets/images/logo-tr.svg"></image>正在加载...
+    </view>
+    <view class="common-pagiantion-nomore" wx:if="{{nothing}}">
+      ------ 没有更多了 ------
+    </view>
+</view>

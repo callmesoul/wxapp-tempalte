@@ -1,0 +1,9 @@
+<!--component/is-null/is-null.wxml-->
+<view class="no-content">
+    <view class="no-content-pic">
+      <image src="/assets/images/box.svg"></image>
+    </view>
+    <view class="no-content-cont"><!--<text>哎呦，什么任务都没有~</text><text>快去图书馆挑书发起共读任务吧！</text>-->
+      <slot></slot>
+    </view>
+  </view>

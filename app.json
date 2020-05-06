@@ -4,6 +4,11 @@
         "pages/logs/logs",
         "pages/login"
     ],
+    "usingComponents": {
+        "skeleton": "./component/skeleton/skeleton",
+        "pagination": "./component/pagination/pagination",
+        "is-null": "./component/is-null/is-null"
+    },
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
