@@ -25,3 +25,10 @@ assets/styles/font.wxss
 - 分页加载提示（pagination）
 - 生成分享海报（poster-modal）[https://github.com/jasondu/wxa-plugin-canvas](https://github.com/jasondu/wxa-plugin-canvas)
 - 骨架屏（skeleton）
+
+
+## 使用步骤
+1. 使用微信开发者工具导入
+2. 勾选微信开发者工具的`增强编译选项`
+3. 进入目录，安装依赖`npm install`
+4. 微信开发者工具-> 工具 -> 构建npm 即可
