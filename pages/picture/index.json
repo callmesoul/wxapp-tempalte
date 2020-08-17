@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "录入照片",
+  "usingComponents": {
+    "image-cropper": "../../component/image-cropper/image-cropper"
+  }
+}

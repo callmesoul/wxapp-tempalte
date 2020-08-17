@@ -1,4 +1,4 @@
-import { GetQiNiuToken } from '../api/utils'
+import { GetQiNiuToken } from '../api/util'
 const qiniuUploader = require("./qiniuUploader-min")
 /**
    * 以wx.request作为底层方法

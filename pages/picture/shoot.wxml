@@ -1,0 +1,15 @@
+<view class="picture-camera flex flex-v">
+  <view class="picture-camera-warp  flex1">
+    <view class="camera-warp ">
+      <camera device-position="{{devicePosition}}" flash="off" binderror="error" wx:if="{{ src === ''}}"></camera>
+      <cover-image src="{{src}}" wx:else></cover-image>
+      <cover-image src="../../assets/images/camera_bg.png"></cover-image>
+    </view>
+    <view class="tips">请保持光线充足，面部清晰，露出眉毛和眼睛</view>
+  </view>
+  <view class="operate flex flex-align-center">
+      <view class="operate-item text-left flex1" catchtap="back">取消</view>
+      <view class="operate-item text-center flex1 take" catchtap="takePhoto"><view class="big flex flex-align-center flex-pack-center"><view class="small"></view></view></view>
+      <view class="operate-item text-right flex1" catchtap="changePoition"><image src="../../assets/images/camera.png"></image></view>
+    </view>
+</view>

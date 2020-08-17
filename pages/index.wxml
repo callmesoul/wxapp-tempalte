@@ -1,0 +1,46 @@
+<skeleton wx:if="{{isShowSkeleton}}"></skeleton>
+
+<block wx:else>
+	<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+	<mp-form id="form" rules="{{rules}}" models="{{formData}}">
+		<mp-cells title="学生基本信息填写">
+			<mp-cell show-error prop="areaName" value="选择地区" ext-class="flex-cell require">
+				<picker slot="footer" mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindAreaChange" bindchange="areaChange" value="{{areaIndex}}" range="{{areas}}" range-key="name">
+					<view class="warp">
+						<input disabled class="weui-input" data-field="areaName" value="{{formData.areaName}}" placeholder="请选择"></input>
+						<mp-icon icon="arrow" color="#999" size="{{14}}"></mp-icon>
+					</view>
+				</picker>
+			</mp-cell>
+			<mp-cell show-error prop="schoolName" value="所在学校" ext-class="flex-cell require">
+				<picker disabled="{{ formData.areaName && formData.areaName !== '' ? false : true }}" slot="footer" bindchange="bindSchoolChange" value="{{schoolIndex}}" range="{{schools}}" range-key="schoolName">
+					<view class="warp">
+						<input disabled class="weui-input" data-field="schoolName" value="{{formData.schoolName}}" placeholder="{{ formData.areaName === '' ? '请先选择地区' : '请选择' }}"></input>
+						<mp-icon icon="arrow" color="#999" size="{{14}}"></mp-icon>
+					</view>
+				</picker>
+			</mp-cell>
+			<mp-cell show-error prop="className" value="所在班级" ext-class="flex-cell require">
+				<picker disabled="{{ schoolIndex !== '' ? false : true }}" slot="footer" bindchange="bindClassChange" value="{{classIndex}}" range="{{classs}}" range-key="name">
+					<view class="warp">
+						<input disabled class="weui-input" data-field="className" value="{{formData.className}}" placeholder="{{ schoolIndex === '' ? '请先选择学校' : '请选择' }}"></input>
+						<mp-icon icon="arrow" color="#999" size="{{14}}"></mp-icon>
+					</view>
+				</picker>
+			</mp-cell>
+			<mp-cell show-error prop="name" title="学生姓名" ext-class="require">
+				<input value="{{formData.name}}" bindinput="formInputChange" data-field="name" class="weui-input" placeholder="请输入学生姓名" />
+			</mp-cell>
+			<mp-cell show-error prop="stuCard" title="学籍号" ext-class="">
+				<input value="{{formData.stuCard}}" bindinput="formInputChange" data-field="stuCard" class="weui-input" placeholder="请输入学籍号" />
+			</mp-cell>
+			<mp-cell show-error prop="remarks" title="其他信息" ext-class="">
+				<input value="{{formData.remarks}}" bindinput="formInputChange" type="number" data-field="remarks" class="weui-input" placeholder="请输入其他信息" />
+			</mp-cell>
+		</mp-cells>
+	</mp-form>
+
+	<view class="weui-btn-area">
+		<button class="weui-btn" type="primary" bindtap="submitForm">下一步</button>
+	</view>
+</block>

@@ -1,0 +1,61 @@
+/* pages/index.wxss */
+.weui-select {
+    height: auto;
+    line-height: auto;
+}
+.weui-input{
+    text-align: right;
+}
+.weui-btn-area{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 3;
+    box-sizing: border-box;
+}
+.weui-btn-area{
+    width: 100% !important;
+    padding: 30rpx;
+    margin: 0;
+}
+.weui-btn-area button{
+    width: 100% !important;
+}
+picker{
+    display: flex !important;
+    min-width: 0;
+    align-items: center;
+}
+picker .warp{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+picker .warp input{
+    flex: 1;
+    color: #000;
+}
+mp-icon{
+    margin-left: 10rpx;
+}
+.flex-cell .weui-cell__ft{
+    flex: 1;
+    display:  flex;
+    align-items: center;
+}
+.require .weui-cell__hd{
+    position: relative;
+}
+.require .weui-cell__hd:before{
+    content: '*';
+    position: absolute;
+    color: #fa5151;
+    left: 0;
+    top: 0;
+    margin-left: -20rpx;
+    margin-top: -10rpx;
+}
+.flex-cell.require .weui-cell__hd:before{
+    margin-top: -40rpx;
+}

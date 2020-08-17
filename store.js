@@ -11,7 +11,6 @@ export const store = observable({
 
     changeUserInfo: action(function (params) {
       for (let i in params) {
-        debugger
         this.userInfo[i] = params[i]
       }
     })

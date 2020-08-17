@@ -1,0 +1,9 @@
+<view class="picture-show flex flex-align-center flex-pack-center">
+    <view class="picture-show-warp">
+        <image src="{{userInfo.photoUrl}}" mode="widthFix" wx:if="{{userInfo.photoUrl && userInfo.photoUrl !== ''}}" catchtap="prevImg"></image>
+        <image wx:else src="../../assets/images/default_stu.jpg" mode="widthFix"></image>
+        <view class="actions">
+            <button class="weui-btn" type="primary" catchtap="toPictureIndex">{{userInfo.photoUrl && userInfo.photoUrl !== '' ? '修改' : '上传'}}照片</button>
+        </view>
+    </view>
+</view>

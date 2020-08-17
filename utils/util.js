@@ -4,8 +4,8 @@ import {
   GetSelfInfo
 } from '../api/user'
 import {
-  GetOssToken
-} from '../api/utils'
+  GetOssToken, GetFaceToken
+} from '../api/util'
 import {
   store
 } from '../store'
@@ -380,7 +380,11 @@ const GetSetting = (type) => {
   return new Promise(resolve => {
     wx.getSetting({
       success(res) {
-        resolve(res.authSetting[`scope.${type}`])
+        if(res.authSetting[`scope.${type}`] || res.authSetting[`scope.${type}`] === undefined){
+          resolve(true)
+        } else{
+          resolve(false)
+        }
       }
     })
   })
@@ -465,6 +469,138 @@ const UpdateUserInfo = (userInfo) => {
   })
 }
 
+// 文件转base64编码
+const FileToBase64 = (image) => {
+  return new Promise(async (resolve,reject)=>{
+    // 转base64
+    if(image){
+      const fileManage = wx.getFileSystemManager()
+      fileManage.readFile({
+        filePath: image,
+        encoding: 'base64',
+        success:(res)=>{
+          resolve(res.data)
+        },
+        fail:(error)=>{
+          console.log('readFile',error)
+          resolve(null)
+        }
+      })
+    }
+  })
+}
+
+
+// 图像识别 验证
+const ImageIdentify = (imgBase64) => {
+  return new Promise(async (resolve) =>{
+    if(imgBase64){
+      let res = await GetFaceToken()
+      if(res.code === 200){
+        wx.request({
+          url: `https://aip.baidubce.com/rest/2.0/face/v3/detect?access_token=${res.data}`,
+          method: 'POST',
+          data: {
+            image: imgBase64,
+            face_field: 'quality',
+            image_type: 'BASE64',
+            max_face_num: 2,
+            face_type: 'LIVE',
+            liveness_control: 'NORMAL'
+          },
+          success:async (res) => {
+            if(res.data.error_code === 0){
+              if(res.data.result){
+                if(res.data.result.face_num === 1){
+                  let face = res.data.result.face_list[0]
+                  // face_probability 代表这是一张人脸的概率，0最小、1最大。
+                  if(face.face_probability >= 0.7){
+                    let quality = face.quality
+                    if(quality.blur > 0.6){
+                      wx.showToast({
+                        title: '图片不清晰',
+                        icon: 'none'
+                      })
+                      resolve(false)
+                    }else{
+                      if(quality.illumination < 60){
+                        wx.showToast({
+                          title: '图片亮度较低',
+                          icon: 'none'
+                        })
+                        resolve(false)
+                      }else{
+                        let angle = face.angle
+                        if(angle.pitch > 20 || angle.roll > 20 || angle.yaw > 20){
+                          wx.showToast({
+                            title: '人脸角度不正',
+                            icon: 'none'
+                          })
+                          resolve(false)
+                        }else{
+                          let occlusion = quality.occlusion
+                          let num =0.5
+                          if(occlusion.left_eye > num || occlusion.right_eye > num || occlusion.nose > num || occlusion.mouth > num || occlusion.left_cheek > num || occlusion.right_cheek > num || occlusion.chin_contour > num){
+                            wx.showToast({
+                              title: '脸部不全或有遮挡',
+                              icon: 'none'
+                            })
+                            resolve(false)
+                          }else{
+                            if(quality.completeness === 0){
+                              wx.showToast({
+                                title: '人脸不完整',
+                                icon: 'none'
+                              })
+                              resolve(false)
+                            }else{
+                              resolve(face.location)
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }else{
+                    wx.showToast({
+                      title: '图片不规范，请重新选择图片或拍摄',
+                      icon: 'none'
+                    })
+                    resolve(false)
+                  }
+                } else{
+                  wx.showToast({
+                    title: '必须为单人照，请重新选择图片或拍摄',
+                    icon: 'none'
+                  })
+                  resolve(false)
+                }
+              }else{
+                wx.showToast({
+                  title: '检测不到人脸，请重新选择图片或拍摄',
+                  icon: 'none'
+                })
+                resolve(false)
+              }
+            }else{
+              wx.showToast({
+                title: '检测不到人脸，请重新选择图片或拍摄',
+                icon: 'none'
+              })
+              resolve(false)
+            }
+          },
+          fail:(error)=>{
+            console.log(error)
+            resolve(false)
+          }
+        })
+      }else{
+        resolve(false)
+      }
+    }
+  })
+}
+
 module.exports = {
   formatTime: formatTime,
   ChooseImage: chooseImage,
@@ -484,5 +620,7 @@ module.exports = {
   ShowActionSheet,
   ChooseVideo,
   Compare,
-  UpdateUserInfo
+  UpdateUserInfo,
+  FileToBase64,
+  ImageIdentify
 }

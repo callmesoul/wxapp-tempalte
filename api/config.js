@@ -2,6 +2,8 @@ const Fly = require('../utils/fly')
 const tokenFly = new Fly;
 const fly = new Fly
 const accountInfo = wx.getAccountInfoSync()
+import { LoginUrl } from './auth'
+import { GetUserInfoUrl } from './user'
 import {
     store
 } from '../store'
@@ -27,7 +29,7 @@ fly.interceptors.request.use(async (request) => {
     const token = wx.getStorageSync('token')
     // 请求前先判断是否有token
     if (token && token !== '') {
-        request.headers['token'] = token
+        request.headers['openId'] = token
         // 如果有token 就判断是否已有用户信息，如果没有则锁住请求。先去获取用户信息，在继续原来请求
         if (!store.userInfo) {
             fly.lock();
@@ -99,14 +101,16 @@ function login() {
     return new Promise((resolve, reject) => {
         wx.login({
             success(res) {
+                debugger
                 if (res.code) {
                     //发起网络请求
-                    return tokenFly.post('/sso/wxLogin.do', {
-                        code: res.code
+                    return tokenFly.post(LoginUrl(), {
+                        code: res.code,
+                        appId: accountInfo.miniProgram.appId
                     }).then((result) => {
-                        if (result.data.code === 'C200') {
-                            wx.setStorageSync('token', result.data.data.sessionKey)
-                            resolve(result.data.data.sessionKey)
+                        if (result.data.code === 200) {
+                            wx.setStorageSync('token', result.data.data.openId)
+                            resolve(result.data.data.openId)
                         }
                     })
                 } else {
@@ -125,27 +129,27 @@ function login() {
 // 获取用户信息
 function getUserinfo(sessionKey) {
     return new Promise((resolve, reject) => {
-        tokenFly.get('/user/getUserInfo.do', {}, {
+        tokenFly.get(GetUserInfoUrl(), {}, {
             headers: {
-                sessionKey: sessionKey
+                openId: sessionKey
             }
         }).then((result) => {
-            if (result.data.code === 'C200') {
+            if (result.data.code === 200) {
                 store.setUserInfo({
-                    userInfo: result.data.data
+                    userInfo: result.data.data ? result.data.data : {}
                 })
                 resolve()
             } else if (result.data.code === 'C501') {
                 // token 过期
                 login().then((_sessionKey) => {
-                    tokenFly.get('/user/getUserInfo.do', {}, {
+                    tokenFly.get(GetUserInfoUrl(), {}, {
                         headers: {
-                            sessionKey: _sessionKey
+                            openId: _sessionKey
                         }
                     }).then((result) => {
                         if (result.data.code === 'C200') {
                             store.setUserInfo({
-                                userInfo: result.data.data
+                                userInfo: result.data.data ? result.data.data : {}
                             })
                             resolve()
                         }

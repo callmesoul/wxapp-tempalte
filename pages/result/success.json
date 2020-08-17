@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "录入照片",
+  "usingComponents": {
+    "mp-msg": "/miniprogram_npm/weui-miniprogram/msg/msg"
+  }
+}

@@ -1,0 +1,12 @@
+/* pages/picture/index.wxss */
+.pic{
+    margin-top: 60rpx;
+    text-align: center;
+}
+.pic image{
+    width: 400rpx;
+    height: 0;
+}
+.tips{
+    text-align: center;
+}

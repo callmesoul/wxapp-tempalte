@@ -1,17 +1,27 @@
 {
     "pages": [
-        "pages/index/index"
+        "pages/index",
+        "pages/picture/index",
+        "pages/picture/shoot",
+        "pages/result/success",
+        "pages/picture/show"
     ],
     "usingComponents": {
         "skeleton": "./component/skeleton/skeleton",
         "pagination": "./component/pagination/pagination",
-        "is-null": "./component/is-null/is-null"
+        "is-null": "./component/is-null/is-null",
+        "mp-dialog": "/miniprogram_npm/weui-miniprogram/dialog/dialog",
+        "mp-toptips": "/miniprogram_npm/weui-miniprogram/toptips/toptips",
+        "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon"
     },
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "WeChat",
         "navigationBarTextStyle": "black"
+    },
+    "useExtendedLib": {
+        "weui": true
     },
     "style": "v2",
     "sitemapLocation": "sitemap.json"

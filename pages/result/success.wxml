@@ -1,0 +1,8 @@
+<view class="page">
+    <mp-msg type="success" title="提交成功">
+        <view slot="desc">您已完善资料</view>
+        <view slot="handle">
+            <button class="weui-btn" type="primary" catchtap="back">查看/修改资料</button>
+        </view>
+    </mp-msg>
+</view>

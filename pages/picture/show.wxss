@@ -1,0 +1,12 @@
+/* pages/picture/show.wxss */
+
+page, .picture-show{
+    height: 100%;
+}
+.picture-show image{
+    width: 400rpx;
+    height: 0;
+}
+.picture-show .actions{
+    margin-top: 30rpx;
+}

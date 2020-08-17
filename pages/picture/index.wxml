@@ -1,0 +1,14 @@
+<!--pages/picture/index.wxml-->
+<skeleton wx:if="{{isShowSkeleton}}"></skeleton>
+<view class="pic">
+    <image src="{{ config.photoUrl }}" mode="widthFix"></image>
+</view>
+
+<view class="tips">{{ config.photoPrompt }}</view>
+    
+<view class="weui-btn-area">
+    <button class="weui-btn" type="primary" catchtap="toCamera">拍照上传</button>
+    <button class="weui-btn" type="default" catchtap="chooseImage">从相册选择</button>
+</view>
+
+<image-cropper id="image-cropper" limit_move="{{true}}" disable_rotate="{{true}}" width="{{320}}" height="{{400}}" max_width="{{320}}" max_height="{{400}}" imgSrc="{{apply.picture}}" bindload="cropperload" bindimageload="loadimage" bindcancel="hidenImageCropper" disable_width="{{true}}" disable_height="{{true}}"  bindtapcut="clickcut" wx:if="{{isShowImageCropper}}"></image-cropper>
