@@ -16,7 +16,7 @@ Page({
     onLoad: function (options) {
         this.storeBindings = createStoreBindings(this, {
             store,
-            fields: ['userInfo']
+            fields: ['userInfo', 'photoUrl']
         })
     },
 

@@ -11,4 +11,4 @@
     <button class="weui-btn" type="default" catchtap="chooseImage">从相册选择</button>
 </view>
 
-<image-cropper id="image-cropper" limit_move="{{true}}" disable_rotate="{{true}}" width="{{320}}" height="{{400}}" max_width="{{320}}" max_height="{{400}}" imgSrc="{{apply.picture}}" bindload="cropperload" bindimageload="loadimage" bindcancel="hidenImageCropper" disable_width="{{true}}" disable_height="{{true}}"  bindtapcut="clickcut" wx:if="{{isShowImageCropper}}"></image-cropper>
+<image-cropper id="image-cropper" limit_move="{{true}}" disable_rotate="{{true}}" width="{{320}}" height="{{400}}" max_width="{{320}}" max_height="{{400}}" imgSrc="{{apply.picture}}" bindload="cropperload" quality="{{0.6}}" export_scale="{{1}}" bindimageload="loadimage" bindcancel="hidenImageCropper" disable_width="{{true}}" disable_height="{{true}}"  bindtapcut="clickcut" wx:if="{{isShowImageCropper}}"></image-cropper>
